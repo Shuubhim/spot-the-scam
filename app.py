@@ -8,6 +8,8 @@ import seaborn as sns
 import shap
 import streamlit.components.v1 as components
 from shap.plots import force
+import requests
+from io import BytesIO
 
 # Page setup
 st.set_page_config(page_title="Spot the Scam", layout="wide")
@@ -51,10 +53,26 @@ st.markdown("""
 
 uploaded_file = st.file_uploader("📂 Upload your raw `test.csv` file to begin:", type=["csv"])
 
+# =============================
+# 🔗 Load Processed CSV from Google Drive
+# =============================
+@st.cache_data
+
+def load_processed_csv_from_drive():
+    file_id = "1012u7YCKd9cm7Rcp52TKnMbrjxgII5fK"
+    url = f"https://drive.google.com/uc?export=download&id={file_id}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        return pd.read_csv(BytesIO(response.content))
+    else:
+        st.error("Failed to fetch X_test_processed.csv from Google Drive.")
+        st.stop()
+
+processed_test = load_processed_csv_from_drive()
+
 if uploaded_file:
     try:
         raw_test = pd.read_csv(uploaded_file)
-        processed_test = pd.read_csv("X_test_processed.csv")
 
         preds_proba = model.predict_proba(processed_test)[:, 1]
         preds = (preds_proba >= 0.5).astype(int)
