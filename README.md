@@ -35,10 +35,6 @@ spot-the-scam/
 ├── X_test_processed.csv
 ├── requirements.txt
 ├── README.md
-└── .streamlit/
-└── config.toml
----
-
 ---
 
 ## ⚙️ Setup Instructions
