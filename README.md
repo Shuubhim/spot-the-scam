@@ -44,7 +44,18 @@ spot-the-scam/
    git clone https://github.com/your-username/spot-the-scam.git
    cd spot-the-scam
 2. Install dependencies:
+   ```bash
    pip install -r requirements.txt
 
 3. Run the app:
+   ```bash
    streamlit run app.py
+
+## 📁 External Files
+
+Since `X_test_processed.csv` exceeds GitHub's file size limit, it's hosted on Google Drive.
+
+- 🔗 [Download X_test_processed.csv](https://drive.google.com/uc?export=download&id=1012u7YCKd9cm7Rcp52TKnMbrjxgII5fK)
+
+> ⚠️ Make sure to download this file manually and place it in your root project folder before running `app.py`.
+
